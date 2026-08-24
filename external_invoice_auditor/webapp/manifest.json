@@ -1,0 +1,186 @@
+{
+  "_version": "1.86.0",
+  "sap.app": {
+    "id": "externalinvoiceauditor",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.31.1",
+      "toolsId": "83fea817-1dfb-46d6-b3f0-ff3fe3ebc8c9"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/here/goes/your/serviceurl/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.151.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "externalinvoiceauditor.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ExternalInvoiceHeadList",
+          "target": "ExternalInvoiceHeadList"
+        },
+        {
+          "pattern": "ExternalInvoiceHead({key}):?query:",
+          "name": "ExternalInvoiceHeadObjectPage",
+          "target": "ExternalInvoiceHeadObjectPage"
+        },
+        {
+          "pattern": "ExternalInvoiceHead({key})/_ExternalInvoiceItem({key2}):?query:",
+          "name": "ExternalInvoiceItemObjectPage",
+          "target": "ExternalInvoiceItemObjectPage"
+        }
+      ],
+      "targets": {
+        "ExternalInvoiceHeadList": {
+          "type": "Component",
+          "id": "ExternalInvoiceHeadList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ExternalInvoiceHead",
+              "variantManagement": "Page",
+              "navigation": {
+                "ExternalInvoiceHead": {
+                  "detail": {
+                    "route": "ExternalInvoiceHeadObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ExternalInvoiceHeadObjectPage": {
+          "type": "Component",
+          "id": "ExternalInvoiceHeadObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ExternalInvoiceHead",
+              "navigation": {
+                "_ExternalInvoiceItem": {
+                  "detail": {
+                    "route": "ExternalInvoiceItemObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "_ExternalInvoiceItem/@com.sap.vocabularies.UI.v1.LineItem#ExternalInvoiceItems": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ExternalInvoiceItemObjectPage": {
+          "type": "Component",
+          "id": "ExternalInvoiceItemObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ExternalInvoiceHead/_ExternalInvoiceItem"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}
