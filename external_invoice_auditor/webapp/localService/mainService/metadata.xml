@@ -74,6 +74,7 @@
 <Property Name="ProcessID" Type="Edm.String" Nullable="false" MaxLength="20"/>
 <Property Name="ProcessIdDescription" Type="Edm.String" Nullable="false" MaxLength="40"/>
 <Property Name="Checkstatus" Type="Edm.String" Nullable="false" MaxLength="1"/>
+<Property Name="ProcessStatusExternalInvoice" Type="Edm.String" Nullable="false" MaxLength="1"/>
 <Property Name="CriticalityProcessStatus" Type="Edm.Byte" Nullable="false"/>
 <Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="4"/>
 <Property Name="DocumentTypeDescription" Type="Edm.String" Nullable="false" MaxLength="15"/>
@@ -81,8 +82,9 @@
 <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <Property Name="InvoiceDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <Property Name="Approver" Type="Edm.String" Nullable="false" MaxLength="12"/>
-<Property Name="ApproverFullName" Type="Edm.String" Nullable="false" MaxLength="85"/>
 <Property Name="ApprovmentStatus" Type="Edm.String" Nullable="false" MaxLength="10"/>
+<Property Name="CriticalityApprovementStatus" Type="Edm.Byte" Nullable="false"/>
+<Property Name="ApproverFullName" Type="Edm.String" Nullable="false" MaxLength="85"/>
 <Property Name="AmountToBeApproved" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="variable"/>
 <Property Name="ApprovementText" Type="Edm.String" Nullable="false" MaxLength="200"/>
 <Property Name="ApprovementStatusTimestamp" Type="Edm.DateTimeOffset" Precision="7"/>
@@ -93,9 +95,6 @@
 <Property Name="CreatedByFullName" Type="Edm.String" Nullable="false" MaxLength="85"/>
 <Property Name="CreatedAtDate" Type="Edm.Date"/>
 <Property Name="CreateAtTime" Type="Edm.TimeOfDay" Nullable="false"/>
-<Property Name="ChangedBy" Type="Edm.String" Nullable="false" MaxLength="12"/>
-<Property Name="ChangedAtDate" Type="Edm.Date"/>
-<Property Name="ChangedAtTime" Type="Edm.TimeOfDay" Nullable="false"/>
 <Property Name="__CreateByAssociationControl" Type="com.sap.gateway.srvd.zui_externalinvoiceauditor.v0001.ExternalInvoiceHeadCbAControl"/>
 <NavigationProperty Name="_ApprovementStatus" Type="com.sap.gateway.srvd.zui_externalinvoiceauditor.v0001.ApprovementStatusType" Nullable="false"/>
 <NavigationProperty Name="_ExternalInvoiceItem" Type="Collection(com.sap.gateway.srvd.zui_externalinvoiceauditor.v0001.ExternalInvoiceItemType)" Partner="_EXTERNALINVOICEHEADER">
@@ -425,10 +424,12 @@
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/CustomerFullName">
 <Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Händlername"/>
 <Annotation Term="SAP__common.QuickInfo" String="External Invoice: Invoice customer name"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/ProcessID">
+<Annotation Term="SAP__common.Text" Path="ProcessIdDescription"/>
 <Annotation Term="SAP__common.IsUpperCase"/>
 <Annotation Term="SAP__common.Label" String="Vorgang"/>
 <Annotation Term="SAP__common.Heading" String="Vorgangsnummer"/>
@@ -439,6 +440,12 @@
 <Annotation Term="SAP__common.Label" String="Status prüfen"/>
 <Annotation Term="SAP__common.Heading" String="Überprüfung des Status"/>
 <Annotation Term="SAP__common.QuickInfo" String="Staging Check Status"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/ProcessStatusExternalInvoice">
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__common.Label" String="Verarbeitungsstatus"/>
+<Annotation Term="SAP__common.Heading" String="Verarbeitungsstatus Dokument"/>
+<Annotation Term="SAP__common.QuickInfo" String="Staging Verarbeitungsstatus Dokument"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/DocType">
 <Annotation Term="SAP__common.Text" Path="DocumentTypeDescription"/>
@@ -485,11 +492,6 @@
 <Annotation Term="SAP__common.Heading" String="SAP-User Freigeber"/>
 <Annotation Term="SAP__common.QuickInfo" String="User of approver in invoice workflow"/>
 </Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/ApproverFullName">
-<Annotation Term="SAP__common.IsUpperCase"/>
-<Annotation Term="SAP__common.Label" String="Freigebername"/>
-<Annotation Term="SAP__common.QuickInfo" String="External Invoice: Invoice approver name"/>
-</Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/ApprovmentStatus">
 <Annotation Term="SAP__common.IsUpperCase"/>
 <Annotation Term="SAP__common.ValueListReferences">
@@ -500,6 +502,16 @@
 <Annotation Term="SAP__common.Label" String="Genehmigungsstatus"/>
 <Annotation Term="SAP__common.Heading" String="Genehmigungsstatus Workflow"/>
 <Annotation Term="SAP__common.QuickInfo" String="External Invoice approvment status"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/CriticalityApprovementStatus">
+<Annotation Term="SAP__core.Computed"/>
+<Annotation Term="SAP__UI.Hidden"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/ApproverFullName">
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Freigebername"/>
+<Annotation Term="SAP__common.QuickInfo" String="External Invoice: Invoice approver name"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/AmountToBeApproved">
 <Annotation Term="SAP__measures.ISOCurrency" Path="CurrencyCode"/>
@@ -557,23 +569,6 @@
 <Annotation Term="SAP__core.Computed"/>
 <Annotation Term="SAP__common.Label" String="Erzeugungszeit"/>
 <Annotation Term="SAP__common.Heading" String="Erzzeit."/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/ChangedBy">
-<Annotation Term="SAP__core.Computed"/>
-<Annotation Term="SAP__common.IsUpperCase"/>
-<Annotation Term="SAP__common.Label" String="Änderer"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/ChangedAtDate">
-<Annotation Term="SAP__core.Computed"/>
-<Annotation Term="SAP__common.Label" String="Verarbeitungsdatum"/>
-<Annotation Term="SAP__common.Heading" String="Dat.Verarb"/>
-<Annotation Term="SAP__common.QuickInfo" String="Datum der Verarbeitung"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/ChangedAtTime">
-<Annotation Term="SAP__core.Computed"/>
-<Annotation Term="SAP__common.Label" String="Verarbeitungsuhrzeit"/>
-<Annotation Term="SAP__common.Heading" String="Uhrz.Ver"/>
-<Annotation Term="SAP__common.QuickInfo" String="Uhrzeit der Verarbeitung"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/__CreateByAssociationControl">
 <Annotation Term="SAP__core.Computed"/>
@@ -668,6 +663,25 @@
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType">
 <Annotation Term="SAP__common.Label" String="External Invoice Head Auditor functions"/>
+<Annotation Term="SAP__UI.Identification">
+<Collection>
+<Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
+<PropertyValue Property="SemanticObject" String="BusinessPartner"/>
+<PropertyValue Property="Action" String="manage"/>
+<PropertyValue Property="Value" Path="Customer"/>
+</Record>
+<Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
+<PropertyValue Property="SemanticObject" String="BillingDocument"/>
+<PropertyValue Property="Action" String="display"/>
+<PropertyValue Property="Value" Path="InvoiceDocument"/>
+</Record>
+<Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
+<PropertyValue Property="SemanticObject" String="SalesDocument"/>
+<PropertyValue Property="Action" String="display"/>
+<PropertyValue Property="Value" Path="SalesDocument"/>
+</Record>
+</Collection>
+</Annotation>
 </Annotations>
 <Annotations Target="SAP__self.Container">
 <Annotation Term="SAP__CodeList.CurrencyCodes">
@@ -785,11 +799,13 @@
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/MaterialNumber">
 <Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Material"/>
 <Annotation Term="SAP__common.QuickInfo" String="Materialnummer"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/ConditionUnit">
 <Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Währung / %"/>
 <Annotation Term="SAP__common.QuickInfo" String="Anreizbedingung Einheit / Prozentsatz"/>
 </Annotations>
@@ -856,12 +872,14 @@
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/CheckStatus">
 <Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Status prüfen"/>
 <Annotation Term="SAP__common.Heading" String="Überprüfung des Status"/>
 <Annotation Term="SAP__common.QuickInfo" String="Staging Check Status"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/ProcessStatus">
 <Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Verarbeitungsstatus"/>
 <Annotation Term="SAP__common.Heading" String="Verarbeitungsstatus Dokument"/>
 <Annotation Term="SAP__common.QuickInfo" String="Staging Verarbeitungsstatus Dokument"/>
@@ -1032,7 +1050,17 @@
 <Annotation Term="SAP__common.Label" String="External Invoice Item Auditor functions"/>
 <Annotation Term="SAP__common.SemanticKey">
 <Collection>
+<PropertyPath>Itemindex</PropertyPath>
 <PropertyPath>SequenceNumber</PropertyPath>
+</Collection>
+</Annotation>
+<Annotation Term="SAP__UI.Identification">
+<Collection>
+<Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
+<PropertyValue Property="SemanticObject" String="BusinessPartner"/>
+<PropertyValue Property="Action" String="manage"/>
+<PropertyValue Property="Value" Path="Dealer"/>
+</Record>
 </Collection>
 </Annotation>
 </Annotations>
@@ -1704,10 +1732,32 @@
 <Annotation Term="SAP__common.Heading" String="Entwurf wird bearbeitet von (Beschreibung)"/>
 <Annotation Term="SAP__common.QuickInfo" String="Entwurf wird bearbeitet von (Beschreibung)"/>
 </Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/SalesOrganizationName">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Beschreibung der Verkaufsorganisation"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/DistributionChannelName">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Beschreibung des Vertriebswegs"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/DivisionName">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Beschreibung der Sparte"/>
+</Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/ProcessIDUUID">
 <Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="UUID"/>
 <Annotation Term="SAP__common.QuickInfo" String="16 byte UUID in 16 bytes (raw format)"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/ProcessIdDescription">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Beschreibung Vorgang"/>
+<Annotation Term="SAP__common.Heading" String="Beschreibungstext Vorgang"/>
+<Annotation Term="SAP__common.QuickInfo" String="Description Process ID / Budget"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/AmountPercentage">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Prozentsatz"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/ProcessIDUUID">
 <Annotation Term="SAP__UI.Hidden"/>
@@ -1723,15 +1773,6 @@
 <Annotation Term="SAP__common.Heading" String="Beschreibungstext Vorgang"/>
 <Annotation Term="SAP__common.QuickInfo" String="Description Process ID / Budget"/>
 </Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/SalesOrganizationName">
-<Annotation Term="SAP__common.Label" String="Beschreibung der Verkaufsorganisation"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/DistributionChannelName">
-<Annotation Term="SAP__common.Label" String="Beschreibung des Vertriebswegs"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/DivisionName">
-<Annotation Term="SAP__common.Label" String="Beschreibung der Sparte"/>
-</Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/VehRelated">
 <Annotation Term="SAP__common.Label" String="Fahrzeugbezug"/>
 <Annotation Term="SAP__common.QuickInfo" String="Fahrzeugbezug Dokument"/>
@@ -1740,18 +1781,10 @@
 <Annotation Term="SAP__common.Label" String="Buchungsdatum"/>
 <Annotation Term="SAP__common.Heading" String="BDatum"/>
 </Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/ProcessIdDescription">
-<Annotation Term="SAP__common.Label" String="Beschreibung Vorgang"/>
-<Annotation Term="SAP__common.Heading" String="Beschreibungstext Vorgang"/>
-<Annotation Term="SAP__common.QuickInfo" String="Description Process ID / Budget"/>
-</Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/__CreateByAssociationControl/_ExternalInvoiceItem">
 <Annotation Term="SAP__common.Label" String="Dyn. AdA-Steuerung"/>
 <Annotation Term="SAP__common.Heading" String="Dynamische Steuerung für Anlegen durch Assoziation"/>
 <Annotation Term="SAP__common.QuickInfo" String="Property der dynam. Steuerung für Anlage per Assoziation"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceItemType/AmountPercentage">
-<Annotation Term="SAP__common.Label" String="Prozentsatz"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/TaxValue">
 <Annotation Term="SAP__common.Label" String="Steuerwert in %"/>

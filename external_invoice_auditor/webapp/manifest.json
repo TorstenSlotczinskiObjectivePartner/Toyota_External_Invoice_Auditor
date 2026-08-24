@@ -102,11 +102,6 @@
           "pattern": "ExternalInvoiceHead({key}):?query:",
           "name": "ExternalInvoiceHeadObjectPage",
           "target": "ExternalInvoiceHeadObjectPage"
-        },
-        {
-          "pattern": "ExternalInvoiceHead({key})/_ExternalInvoiceItem({key2}):?query:",
-          "name": "ExternalInvoiceItemObjectPage",
-          "target": "ExternalInvoiceItemObjectPage"
         }
       ],
       "targets": {
@@ -143,13 +138,7 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/ExternalInvoiceHead",
-              "navigation": {
-                "_ExternalInvoiceItem": {
-                  "detail": {
-                    "route": "ExternalInvoiceItemObjectPage"
-                  }
-                }
-              },
+              "navigation": {},
               "controlConfiguration": {
                 "_ExternalInvoiceItem/@com.sap.vocabularies.UI.v1.LineItem#ExternalInvoiceItems": {
                   "tableSettings": {
@@ -157,17 +146,6 @@
                   }
                 }
               }
-            }
-          }
-        },
-        "ExternalInvoiceItemObjectPage": {
-          "type": "Component",
-          "id": "ExternalInvoiceItemObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/ExternalInvoiceHead/_ExternalInvoiceItem"
             }
           }
         }

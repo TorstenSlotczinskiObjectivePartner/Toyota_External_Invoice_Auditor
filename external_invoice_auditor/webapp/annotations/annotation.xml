@@ -182,6 +182,7 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ApprovmentStatus"/>
                             <PropertyValue Property="Label" String="{@i18n>approvementstatus}"/>
+                            <PropertyValue Property="Criticality" Path="CriticalityApprovementStatus"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="SalesDocument"/>
@@ -268,6 +269,7 @@
                             <Collection>
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Value" Path="ApprovmentStatus"/>
+                                    <PropertyValue Property="Criticality" Path="CriticalityApprovementStatus"/>
                                 </Record>
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Value" Path="Approver"/>
