@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: externalinvoiceauditor
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: D02CLNT100
+          url: http://d02adsonscp:443
+          client: '100'
+        app:
+          name: ZEXTIAUDIT
+          description: External Invoice Auditor
+          package: ZFWF_INVOICE_WORKFLOW_AUDITOR
+          transport: D02K937788
+        exclude:
+          - /test/
