@@ -24,7 +24,7 @@
         }
       },
       "mainService": {
-        "uri": "/here/goes/your/serviceurl/",
+        "uri": "/sap/opu/odata4/sap/ZUI_EXTERNALINVOICEAUDITOR_o4/srvd/sap/ZUI_EXTERNALINVOICEAUDITOR/0001",
         "type": "OData",
         "settings": {
           "annotations": [

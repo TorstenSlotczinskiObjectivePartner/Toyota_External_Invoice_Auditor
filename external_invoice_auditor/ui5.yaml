@@ -16,8 +16,10 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-          - path: /here
-            url: http://localhost
+          - path: /sap
+            url: http://d02adsonscp:443
+            client: '100'
+            destination: D02CLNT100
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

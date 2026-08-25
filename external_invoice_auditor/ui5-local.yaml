@@ -29,16 +29,18 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
-          - path: /here
-            url: http://localhost
+          - path: /sap
+            url: http://d02adsonscp:443
+            client: '100'
+            destination: D02CLNT100
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:
         mountPath: /
         services:
-          - urlPath: /here/goes/your/serviceurl
+          - urlPath: /sap/opu/odata4/sap/ZUI_EXTERNALINVOICEAUDITOR_o4/srvd/sap/ZUI_EXTERNALINVOICEAUDITOR/0001
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true

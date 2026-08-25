@@ -4,7 +4,7 @@
     "generatorPlatform": "SAP Business Application Studio",
     "serviceType": "File",
     "metadataFilename": "Toyota_External_Invoice_Auditor_Metadata.xml",
-    "serviceUrl": "/here/goes/your/serviceurl/",
+    "serviceUrl": "/sap/opu/odata4/sap/ZUI_EXTERNALINVOICEAUDITOR_o4/srvd/sap/ZUI_EXTERNALINVOICEAUDITOR/0001",
     "appName": "external_invoice_auditor",
     "appTitle": "External Invoice Auditor",
     "appDescription": "An SAP Fiori application.",
