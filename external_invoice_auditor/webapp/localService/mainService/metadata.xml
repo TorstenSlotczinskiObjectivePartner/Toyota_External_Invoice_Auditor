@@ -80,7 +80,6 @@
 <Property Name="DocumentTypeDescription" Type="Edm.String" Nullable="false" MaxLength="15"/>
 <Property Name="DocumentFullName" Type="Edm.String" Nullable="false" MaxLength="20"/>
 <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
-<Property Name="InvoiceDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <Property Name="Approver" Type="Edm.String" Nullable="false" MaxLength="12"/>
 <Property Name="ApprovmentStatus" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <Property Name="CriticalityApprovementStatus" Type="Edm.Byte" Nullable="false"/>
@@ -149,6 +148,8 @@
 <Property Name="LoggingID" Type="Edm.String" Nullable="false" MaxLength="42"/>
 <Property Name="LocalLastChangedAt" Type="Edm.DateTimeOffset" Precision="7"/>
 <Property Name="DocumentType" Type="Edm.String" Nullable="false" MaxLength="4"/>
+<Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
+<Property Name="InvoiceDocumentID" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <NavigationProperty Name="_EXTERNALINVOICEHEADER" Type="com.sap.gateway.srvd.zui_externalinvoiceauditor.v0001.ExternalInvoiceHeadType" Nullable="false" Partner="_ExternalInvoiceItem">
 <ReferentialConstraint Property="InterfaceID" ReferencedProperty="InterfaceID"/>
 <ReferentialConstraint Property="CompanyCode" ReferencedProperty="CompanyCode"/>
@@ -474,12 +475,6 @@
 <Annotation Term="SAP__common.Label" String="Vetriebsbeleg"/>
 <Annotation Term="SAP__common.Heading" String="Auftragsn."/>
 </Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceHeadType/InvoiceDocument">
-<Annotation Term="SAP__core.Computed"/>
-<Annotation Term="SAP__common.IsUpperCase"/>
-<Annotation Term="SAP__common.Label" String="Folgebeleg"/>
-<Annotation Term="SAP__common.QuickInfo" String="Folgevertriebsbeleg"/>
-</Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceHeadType/Approver">
 <Annotation Term="SAP__common.Text" Path="ApproverFullName"/>
 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -671,11 +666,6 @@
 <PropertyValue Property="Value" Path="Customer"/>
 </Record>
 <Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
-<PropertyValue Property="SemanticObject" String="BillingDocument"/>
-<PropertyValue Property="Action" String="display"/>
-<PropertyValue Property="Value" Path="InvoiceDocument"/>
-</Record>
-<Record Type="SAP__UI.DataFieldWithIntentBasedNavigation">
 <PropertyValue Property="SemanticObject" String="SalesDocument"/>
 <PropertyValue Property="Action" String="display"/>
 <PropertyValue Property="Value" Path="SalesDocument"/>
@@ -750,7 +740,6 @@
 <Annotations Target="SAP__self.ExternalInvoiceItemType/InterfaceID">
 <Annotation Term="SAP__core.Immutable"/>
 <Annotation Term="SAP__common.IsUpperCase"/>
-<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Interface ID (Key)"/>
 <Annotation Term="SAP__common.Heading" String="Interface ID (Schlüsselfeld)"/>
 <Annotation Term="SAP__common.QuickInfo" String="Interface ID (techn. Schlüsselfeld)"/>
@@ -764,7 +753,6 @@
 <Annotations Target="SAP__self.ExternalInvoiceItemType/SubOrgansation">
 <Annotation Term="SAP__core.Immutable"/>
 <Annotation Term="SAP__common.IsUpperCase"/>
-<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Unterorg.(Key)"/>
 <Annotation Term="SAP__common.Heading" String="Unterorganisation (Schlüsselfeld)"/>
 <Annotation Term="SAP__common.QuickInfo" String="Unterorganisation (techn. Schlüsselfeld)"/>
@@ -963,6 +951,18 @@
 </Annotation>
 <Annotation Term="SAP__common.Label" String="Verkaufsbelegart"/>
 <Annotation Term="SAP__common.Heading" String="VArt"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/SalesDocument">
+<Annotation Term="SAP__core.Computed"/>
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__common.Label" String="Vetriebsbeleg"/>
+<Annotation Term="SAP__common.Heading" String="Auftragsn."/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/InvoiceDocumentID">
+<Annotation Term="SAP__core.Computed"/>
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__common.Label" String="Folgebeleg"/>
+<Annotation Term="SAP__common.QuickInfo" String="Folgevertriebsbeleg"/>
 </Annotations>
 <Annotations Target="SAP__self.Container/ExternalInvoiceItem">
 <Annotation Term="SAP__capabilities.NavigationRestrictions">
@@ -1754,6 +1754,9 @@
 <Annotation Term="SAP__common.Label" String="Beschreibung Vorgang"/>
 <Annotation Term="SAP__common.Heading" String="Beschreibungstext Vorgang"/>
 <Annotation Term="SAP__common.QuickInfo" String="Description Process ID / Budget"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceHeadType/CriticalityProcessStatus">
+<Annotation Term="SAP__UI.Hidden"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/AmountPercentage">
 <Annotation Term="SAP__UI.Hidden"/>

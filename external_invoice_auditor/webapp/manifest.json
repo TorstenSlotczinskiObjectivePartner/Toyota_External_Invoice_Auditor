@@ -97,11 +97,6 @@
           "pattern": ":?query:",
           "name": "ExternalInvoiceHeadList",
           "target": "ExternalInvoiceHeadList"
-        },
-        {
-          "pattern": "ExternalInvoiceHead({key}):?query:",
-          "name": "ExternalInvoiceHeadObjectPage",
-          "target": "ExternalInvoiceHeadObjectPage"
         }
       ],
       "targets": {
@@ -111,36 +106,11 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/ExternalInvoiceHead",
+              "contextPath": "/ExternalInvoiceItem",
               "variantManagement": "Page",
-              "navigation": {
-                "ExternalInvoiceHead": {
-                  "detail": {
-                    "route": "ExternalInvoiceHeadObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "ExternalInvoiceHeadObjectPage": {
-          "type": "Component",
-          "id": "ExternalInvoiceHeadObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/ExternalInvoiceHead",
               "navigation": {},
               "controlConfiguration": {
-                "_ExternalInvoiceItem/@com.sap.vocabularies.UI.v1.LineItem#ExternalInvoiceItems": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
                   }

@@ -334,6 +334,104 @@
                         </Record>
                     </Collection>
                 </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SequenceNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProcessID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="InternalOrder"/>
+                            <PropertyValue Property="Label" String="{@i18n>internalorder}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ItemDescription"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Dealer"/>
+                            <PropertyValue Property="Label" String="{@i18n>businesspartner}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="NetValue"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="TaxValue"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="PostingDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="SalesDocument"/>
+                            <PropertyValue Property="Label" String="{@i18n>salesDocument}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="InvoiceDocumentID"/>
+                            <PropertyValue Property="Label" String="{@i18n>Invoice}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="LocalLastChangedAt"/>
+                            <PropertyValue Property="Label" String="{@i18n>creationtimestamp}"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/Approver"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/ApprovmentStatus"/>
+                            <PropertyValue Property="Label" String="{@i18n>approvementstatus}"/>
+                            <PropertyValue Property="Criticality" Path="_EXTERNALINVOICEHEADER/CriticalityApprovementStatus"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/ApprovementStatusTimestamp"/>
+                            <PropertyValue Property="Label" String="{@i18n>approvementtimestamp}"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>InvoiceDocumentID</PropertyPath>
+                        <PropertyPath>SalesDocument</PropertyPath>
+                        <PropertyPath>ProcessID</PropertyPath>
+                        <PropertyPath>Dealer</PropertyPath>
+                        <PropertyPath>InternalOrder</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ExternalInvoiceItemType/InvoiceDocumentID">
+                <Annotation Term="Common.Label" String="{@i18n>Invoice}"/>
+                <Annotation Term="Common.SemanticObject" String="BillingDocument"/>
+                <Annotation Term="Common.SemanticObjectMapping">
+                    <Collection>
+                        <Record Type="Common.SemanticObjectMappingType">
+                            <PropertyValue Property="LocalProperty" PropertyPath="InvoiceDocumentID"/>
+                            <PropertyValue Property="SemanticObjectProperty" String="BillingDocument"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ExternalInvoiceItemType/SalesDocument">
+                <Annotation Term="Common.Label" String="{@i18n>salesDocument}"/>
+                <Annotation Term="Common.SemanticObject" String="SalesDocument"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ExternalInvoiceItemType/Dealer">
+                <Annotation Term="Common.Label" String="{@i18n>businesspartner}"/>
+                <Annotation Term="Common.SemanticObject" String="BusinessPartner"/>
+                <Annotation Term="Common.SemanticObjectMapping">
+                    <Collection>
+                        <Record Type="Common.SemanticObjectMappingType">
+                            <PropertyValue Property="LocalProperty" PropertyPath="Dealer"/>
+                            <PropertyValue Property="SemanticObjectProperty" String="BusinessPartner"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ExternalInvoiceItemType/InternalOrder">
+                <Annotation Term="Common.Label" String="{@i18n>internalorder}"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>
