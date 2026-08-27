@@ -396,6 +396,9 @@
                             <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/ApprovementStatusTimestamp"/>
                             <PropertyValue Property="Label" String="{@i18n>approvementtimestamp}"/>
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/Approver"/>
+                        </Record>
                     </Collection>
                 </Annotation>
                 <Annotation Term="UI.SelectionFields">
