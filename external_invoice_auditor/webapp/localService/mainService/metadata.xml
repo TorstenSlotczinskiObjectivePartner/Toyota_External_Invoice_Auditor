@@ -776,7 +776,6 @@
 <Annotations Target="SAP__self.ExternalInvoiceItemType/Itemindex">
 <Annotation Term="SAP__core.Immutable"/>
 <Annotation Term="SAP__common.IsDigitSequence"/>
-<Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Positionsnummer(Key)"/>
 <Annotation Term="SAP__common.Heading" String="Positionsnummer (Schlüssel)"/>
 <Annotation Term="SAP__common.QuickInfo" String="Staging Cockpit Postionsnummer (techn. Schlüssel)"/>
@@ -809,11 +808,6 @@
 </Annotation>
 <Annotation Term="SAP__common.Label" String="Auftrag"/>
 <Annotation Term="SAP__common.QuickInfo" String="Auftragsnummer"/>
-</Annotations>
-<Annotations Target="SAP__self.ExternalInvoiceItemType/InternalOrderDescription">
-<Annotation Term="SAP__core.Computed"/>
-<Annotation Term="SAP__UI.Hidden"/>
-<Annotation Term="SAP__common.Label" String="Kurztext"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/TaxType">
 <Annotation Term="SAP__common.IsUpperCase"/>
@@ -1777,6 +1771,10 @@
 <Annotations Target="SAP__self.ExternalInvoiceItemType/AmountPercentage">
 <Annotation Term="SAP__UI.Hidden"/>
 <Annotation Term="SAP__common.Label" String="Prozentsatz"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/InternalOrderDescription">
+<Annotation Term="SAP__UI.Hidden"/>
+<Annotation Term="SAP__common.Label" String="Kurztext"/>
 </Annotations>
 <Annotations Target="SAP__self.ExternalInvoiceItemType/ProcessIDUUID">
 <Annotation Term="SAP__UI.Hidden"/>
