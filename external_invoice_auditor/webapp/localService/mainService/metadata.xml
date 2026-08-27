@@ -150,6 +150,8 @@
 <Property Name="DocumentType" Type="Edm.String" Nullable="false" MaxLength="4"/>
 <Property Name="SalesDocument" Type="Edm.String" Nullable="false" MaxLength="10"/>
 <Property Name="InvoiceDocumentID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+<Property Name="Approver" Type="Edm.String" Nullable="false" MaxLength="12"/>
+<Property Name="ApproverFullName" Type="Edm.String" Nullable="false" MaxLength="85"/>
 <NavigationProperty Name="_EXTERNALINVOICEHEADER" Type="com.sap.gateway.srvd.zui_externalinvoiceauditor.v0001.ExternalInvoiceHeadType" Nullable="false" Partner="_ExternalInvoiceItem">
 <ReferentialConstraint Property="InterfaceID" ReferencedProperty="InterfaceID"/>
 <ReferentialConstraint Property="CompanyCode" ReferencedProperty="CompanyCode"/>
@@ -963,6 +965,20 @@
 <Annotation Term="SAP__common.IsUpperCase"/>
 <Annotation Term="SAP__common.Label" String="Folgebeleg"/>
 <Annotation Term="SAP__common.QuickInfo" String="Folgevertriebsbeleg"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/Approver">
+<Annotation Term="SAP__common.Text" Path="ApproverFullName"/>
+<Annotation Term="SAP__core.Computed"/>
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__common.Label" String="User Freigeber"/>
+<Annotation Term="SAP__common.Heading" String="SAP-User Freigeber"/>
+<Annotation Term="SAP__common.QuickInfo" String="User of approver in invoice workflow"/>
+</Annotations>
+<Annotations Target="SAP__self.ExternalInvoiceItemType/ApproverFullName">
+<Annotation Term="SAP__core.Computed"/>
+<Annotation Term="SAP__common.IsUpperCase"/>
+<Annotation Term="SAP__common.Label" String="Freigebername"/>
+<Annotation Term="SAP__common.QuickInfo" String="External Invoice: Invoice approver name"/>
 </Annotations>
 <Annotations Target="SAP__self.Container/ExternalInvoiceItem">
 <Annotation Term="SAP__capabilities.NavigationRestrictions">

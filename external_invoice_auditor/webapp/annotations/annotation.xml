@@ -378,13 +378,15 @@
                             <PropertyValue Property="Label" String="{@i18n>creationtimestamp}"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/Approver"/>
+                            <PropertyValue Property="Value" Path="Approver"/>
+                            <PropertyValue Property="Label" String="{@i18n>approver}"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/ApprovmentStatus"/>
+                            <PropertyValue Property="Value" Path="ApproverFullName"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/_ApprovementStatus/ApprovmentStatus"/>
                             <PropertyValue Property="Label" String="{@i18n>approvementstatus}"/>
-                            <PropertyValue Property="Criticality" Path="_EXTERNALINVOICEHEADER/CriticalityApprovementStatus"/>
-                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="_EXTERNALINVOICEHEADER/ApprovementStatusTimestamp"/>
